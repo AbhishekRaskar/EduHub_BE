@@ -37,7 +37,9 @@ studentRouter.post("/login", async (req, res) => {
                         student: {
                             studentName: student.name,
                             studentEmail: student.email,
-                            studentCourse: student.course
+                            studentCourse: student.course,
+                            studentContact: student.contact,
+                            studentPassword: student.password
                         }
                     });
                 } else {
