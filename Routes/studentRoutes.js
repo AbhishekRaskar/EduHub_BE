@@ -1,7 +1,6 @@
 const express = require("express");
 const { studentModel } = require("../Model/studentModel");
 const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
 
 const studentRouter = express.Router();
 
@@ -25,7 +24,6 @@ studentRouter.post("/signup", async (req, res) => {
     }
 });
 
-
 // Login
 studentRouter.post("/login", async (req, res) => {
     const { email, password } = req.body;
@@ -34,10 +32,8 @@ studentRouter.post("/login", async (req, res) => {
         if (student) {
             bcrypt.compare(password, student.password, (err, result) => {
                 if (result) {
-                    // const token = jwt.sign({ studentName: student.name, studentID: student._id }, process.env.secret);
                     res.status(200).json({
                         msg: "Login successful.",
-                        // token: token,
                         student: {
                             studentName: student.name,
                             studentEmail: student.email,
@@ -48,6 +44,26 @@ studentRouter.post("/login", async (req, res) => {
                     res.status(400).json({ msg: "Wrong credentials." });
                 }
             });
+        } else {
+            res.status(400).json({ msg: "Student not found." });
+        }
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+});
+
+// Update Profile
+studentRouter.put("/profile", async (req, res) => {
+    const { email } = req.body;
+    try {
+        const student = await studentModel.findOne({ email });
+        if (student) {
+            // Update profile fields here
+            // For example, update name and contact
+            student.name = req.body.name;
+            student.contact = req.body.contact;
+            await student.save();
+            res.status(200).json({ msg: "Profile updated successfully." });
         } else {
             res.status(400).json({ msg: "Student not found." });
         }
