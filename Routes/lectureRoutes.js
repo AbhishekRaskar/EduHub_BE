@@ -3,7 +3,7 @@ const { lectureModel } = require("../Model/lectureModel");
 const { auth } = require("../Middlewares/authMiddleware");
 
 const lectureRouter = express.Router();
-lectureRouter.use(auth);
+// lectureRouter.use(auth);
 
 // To Add a new lecture
 lectureRouter.post("/add", async (req, res) => {
