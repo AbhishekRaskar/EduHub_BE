@@ -64,6 +64,7 @@ studentRouter.put("/profile", async (req, res) => {
             // For example, update name and contact
             student.name = req.body.name;
             student.contact = req.body.contact;
+            student.course = req.body.course;
             await student.save();
             res.status(200).json({ msg: "Profile updated successfully." });
         } else {
