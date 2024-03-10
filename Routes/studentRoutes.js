@@ -35,11 +35,11 @@ studentRouter.post("/login", async (req, res) => {
                     res.status(200).json({
                         msg: "Login successful.",
                         student: {
-                            studentName: student.name,
-                            studentEmail: student.email,
-                            studentCourse: student.course,
-                            studentContact: student.contact,
-                            studentPassword: student.password
+                            name: student.name,
+                            email: student.email,
+                            course: student.course,
+                            contact: student.contact,
+                            password: student.password
                         }
                     });
                 } else {
