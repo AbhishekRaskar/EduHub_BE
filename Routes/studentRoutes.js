@@ -55,7 +55,7 @@ studentRouter.post("/login", async (req, res) => {
 });
 
 // Update Profile
-studentRouter.put("/profile", async (req, res) => {
+studentRouter.patch("/profile", async (req, res) => {
     const { email } = req.body;
     try {
         const student = await studentModel.findOne({ email });
