@@ -5,7 +5,7 @@ const studentSchema = mongoose.Schema({
     email: { type: String, required: true },
     password: { type: String },
     contact: { type: Number, required: true },
-    course: { type: String, required: true }
+    course: { type: String }
 }, {
     versionKey: false
 });
