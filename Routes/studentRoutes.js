@@ -56,16 +56,14 @@ studentRouter.post("/login", async (req, res) => {
 
 // Update Profile
 studentRouter.patch("/profile", async (req, res) => {
-    const { email } = req.body;
+    const { email, name, contact, course } = req.body;
     try {
-        const student = await studentModel.findOne({ email });
+        const student = await studentModel.findOneAndUpdate(
+            { email: email },
+            { name: name, contact: contact, course: course },
+            { new: true }
+        );
         if (student) {
-            // Update profile fields here
-            // For example, update name and contact
-            student.name = req.body.name;
-            student.contact = req.body.contact;
-            student.course = req.body.course;
-            await student.save();
             res.status(200).json({ msg: "Profile updated successfully.", student });
         } else {
             res.status(400).json({ msg: "Student not found." });
