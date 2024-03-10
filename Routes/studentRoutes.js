@@ -39,7 +39,7 @@ studentRouter.post("/login", async (req, res) => {
                             email: student.email,
                             course: student.course,
                             contact: student.contact,
-                            studentPassword: student.password
+                            password: student.password
                         }
                     });
                 } else {
